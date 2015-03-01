@@ -8,7 +8,7 @@ define(['game/box', 'aabb-util', 'print'], function (parent, aabbUtil, print) {
             this.tick = function (time, game) {
                 for (var b in game.boxes) {
                     if (aabbUtil.isIntersect(this, game.boxes[b])) {
-                        print("touch!!!!");
+                        //print("touch!!!!");
                     }
                 }
 
