@@ -26,8 +26,7 @@ define(['game/box', 'aabb-util', 'print'], function (parent, aabbUtil, print) {
 
                 events.add("mouseMove", function (pos) {
                         if (self.dragged) {
-                            self.x = pos.x - self.posOffset.x;
-                            self.y = pos.y - self.posOffset.y;
+                            self.setPos(pos.x - self.posOffset.x, pos.y - self.posOffset.y);
                         }
                     }
                 );

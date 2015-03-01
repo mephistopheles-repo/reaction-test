@@ -61,13 +61,18 @@ define(['aabb-util'], function (aabbUtil) {
                     y = this.y + sy;
                 }
 
-                this.x = x;
-                this.y = y;
-                this.mx = this.x + this.w;
-                this.my = this.y + this.h;
+                this.setPos(x, y);
 
                 lastTime = 0;
             }
+        };
+
+
+        this.setPos = function (x, y) {
+            this.x = x;
+            this.y = y;
+            this.mx = this.x + this.w;
+            this.my = this.y + this.h;
         };
 
         this.draw = function (ctx) {
