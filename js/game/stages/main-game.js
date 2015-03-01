@@ -38,6 +38,8 @@ define(['game/box', 'io-utils', 'events', 'game/player-box'], function (Box, IoU
             player: new Player({x: 200, y: 200}, {h: 50, w: 50}, "darkgrey")
         };
 
+        game.player.aaa(events);
+
         ctxWrapper.mainLoop = function (time) {
             //this - ctxWrapper
             this.clear();
