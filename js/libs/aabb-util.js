@@ -4,6 +4,11 @@
 define(function () {
     return {
         isIntersect: function (a, b) {
+            if (a.mx < b.x) return false; // a is left of b
+            if (a.x > b.mx) return false; // a is right of b
+            if (a.my < b.y) return false; // a is above b
+            if (a.y > b.my) return false; // a is below b
+
             return true;
         },
         isInside: function (outer, inner) {

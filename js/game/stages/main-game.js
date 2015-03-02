@@ -1,9 +1,9 @@
 /**
  * Created by denuss on 28.02.2015.
  */
-define(['game/box', 'io-utils', 'events', 'game/player-box'], function (Box, IoUtils, Events, Player) {
-    return function (ctxWrapper) {
-        var events = new Events();
+define(['game/box', 'io-utils', 'game/player-box', 'underscore-min', 'print'], function (Box, IoUtils, Player, _, print) {
+    return function (ctxWrapper, events) {
+        var self = this;
 
         ctxWrapper.ctx.canvas.addEventListener('mousemove', function (event) {
             event.preventDefault();
@@ -27,22 +27,35 @@ define(['game/box', 'io-utils', 'events', 'game/player-box'], function (Box, IoU
         }, false);
 
         var boxes = [];
-        boxes.push(new Box({x: 30, y: 30}, {h: 70, w: 75}, "green"));
-        boxes.push(new Box({x: 300, y: 330}, {h: 36, w: 150}, "blue"));
-        boxes.push(new Box({x: 20, y: 330}, {h: 105, w: 45}, "brown"));
-        boxes.push(new Box({x: 300, y: 30}, {h: 120, w: 95}, "yellow"));
+        boxes.push(new Box({x: 30, y: 30, h: 70, w: 75, color: "green"}));
+        boxes.push(new Box({x: 300, y: 330, h: 36, w: 150, color: "blue"}));
+        boxes.push(new Box({x: 20, y: 330, h: 105, w: 45, color: "brown"}));
+        boxes.push(new Box({x: 300, y: 30, h: 120, w: 95, color: "yellow"}));
 
         var game = {
             boxes: boxes,
-            field: new Box({x: 0, y: 0}, {h: ctxWrapper.canvasH, w: ctxWrapper.canvasW}),
-            player: new Player({x: 200, y: 200}, {h: 50, w: 50}, "darkgrey")
+            field: new Box({x: 0, y: 0, h: ctxWrapper.canvasH, w: ctxWrapper.canvasW})
         };
 
-        game.player.aaa(events);
+        game.player = new Player({events: events, x: 200, y: 200, h: 50, w: 50, color: "darkgrey", game: game});
+
+        game.isStarted = false;
+        game.gameStartTime = null;
+        events.add("gameStart", function () {
+            game.gameStartTime = new Date();
+            game.isStarted = true;
+        }, true);
+
+        events.add("gameFinish", function () {
+            game.isStarted = false;
+            print("total time: " + (new Date().getTime() - game.gameStartTime.getTime()));
+            events.trigger("restartLevel")
+        });
 
         ctxWrapper.mainLoop = function (time) {
             //this - ctxWrapper
             this.clear();
+
             for (var b in boxes) {
                 boxes[b].tick(time, game);
             }
@@ -54,4 +67,5 @@ define(['game/box', 'io-utils', 'events', 'game/player-box'], function (Box, IoU
             game.player.draw(this.ctx);
         };
     }
-});
+})
+;

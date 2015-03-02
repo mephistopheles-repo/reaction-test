@@ -1,25 +1,30 @@
 /**
  * Created by denuss on 18.02.2015.
  */
-define(["aabb-util", 'print', 'game/box', 'game/ctx-wrapper', 'events','stages/main-game'], function (aabbUtil, print, box, ctxWrapper, events,MainGame) {
+define(['game/ctx-wrapper', 'events', 'stages/main-game'], function (CtxWrapper, Events, MainGame) {
+    var Game = function () {
+        var self = this;
+        this.restartGame = function () {
+            this.ctxWrapper.disposed = true;
 
-    var canvas = document.getElementById("js-canvas");
+            var newCanvas = this.canvas.cloneNode(true);
+            this.canvas.parentNode.replaceChild(newCanvas, this.canvas);
+            this.canvas = newCanvas;
+            this.startGame()
+        };
 
-    ctxWrapper = new ctxWrapper(canvas);
-    ctxWrapper.run();
+        this.startGame = function () {
 
-    var stage = new MainGame(ctxWrapper);
+            this.canvas = document.getElementById("js-canvas");
 
-/*    events = new events();
-    var id = events.add("someShit",function(){print("someShit callback")});
-     id = events.add("someShit",function(){print("someShit callback1")});
-     id = events.add("someShit",function(){print("someShit callback2")});
-     id = events.add("someShit",function(){print("someShit callback3")});
-    events.trigger("someShit");
-    events.remove(id);*/
-
-    /*    //print(aabbUtil.isIntersect(0,0));
-     print(aabbUtil.isInside({x: 0, y: 0, mx: 10, my: 10}, {x: 1, y: 1, mx: 9, my: 9}));
-     print(aabbUtil.isInside({x: 0, y: 0, mx: 10, my: 10}, {x: -4, y: 1, mx: 9, my: 9}));
-     print(aabbUtil.isInside({x: 0, y: 0, mx: 10, my: 10}, {x: 1, y: 1, mx: 9, my: 10}));*/
+            this.ctxWrapper = new CtxWrapper(this.canvas);
+            this.ctxWrapper.run();
+            this.events = new Events();
+            this.events.add("restartLevel", function () {
+                self.restartGame();
+            }, true);
+            this.stage = new MainGame(this.ctxWrapper, this.events);
+        };
+    };
+    new Game().startGame();
 });
