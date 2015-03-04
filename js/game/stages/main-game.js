@@ -28,9 +28,9 @@ define(['game/box', 'io-utils', 'game/player-box', 'underscore-min', 'print'], f
 
         var boxes = [];
         boxes.push(new Box({x: 30, y: 30, h: 70, w: 75, color: "#5cb85c"}));
-        boxes.push(new Box({x: 300, y: 330, h: 36, w: 150, color: "#337ab7"}));
+        boxes.push(new Box({x: 280, y: 350, h: 36, w: 150, color: "#337ab7"}));
         boxes.push(new Box({x: 20, y: 330, h: 105, w: 45, color: "#d9534f"}));
-        boxes.push(new Box({x: 300, y: 30, h: 120, w: 95, color: "#f0ad4e"}));
+        boxes.push(new Box({x: 310, y: 30, h: 120, w: 95, color: "#f0ad4e"}));
 
         var game = {
             boxes: boxes,
