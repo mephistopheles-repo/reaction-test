@@ -2,10 +2,40 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>reaction test</title>
+    <title>Игра: проверь реакцию</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script data-main="js/app" src="js/libs/require.js"></script>
 </head>
-<body style="background-color: black">
-   <canvas id="js-canvas" height="450" width="450"></canvas>
+<body>
+<div id="content" style="background-color: rgb(111, 84, 153);
+background-image: linear-gradient(rgb(86, 61, 124) 0px, rgb(111, 84, 153) 100%);
+background-repeat: repeat-x;
+box-sizing: border-box;
+color: rgb(205, 191, 227);
+margin-bottom: 40px;">
+    <div class="container">
+        <h1 style="color:rgb(255, 255, 255)">Проверка реакции</h1>
+
+        <p>Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced
+            grid system.</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <canvas id="js-canvas" height="450" width="450"></canvas>
+        </div>
+        <div class="col-md-4">
+             <p>Игра заключается в перетаскивании серого квадрата по игровому полю, при этом не задевая другие фигуры и края поля.</p>
+        </div>
+    </div>
+</div>
 </body>
 </html>
