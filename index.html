@@ -28,8 +28,7 @@ margin-bottom: 40px;">
     <div class="container">
         <h1 style="color:rgb(255, 255, 255)">Проверка реакции</h1>
 
-        <p>Global CSS settings, fundamental HTML elements styled and enhanced with extensible classes, and an advanced
-            grid system.</p>
+        <p>Игра развивает реакцию и внимание</p>
     </div>
 </div>
 <div class="container">
@@ -37,25 +36,25 @@ margin-bottom: 40px;">
         <div class="col-md-8" style="height: 480px;width: 480px;background-color: black;padding: 15px;">
             <canvas id="js-canvas" height="450" width="450"></canvas>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="row" style="margin-left: 0; ">
                 <h4>Игра заключается в перетаскивании серого квадрата по игровому полю, при этом не задевая другие
                     фигуры и края поля.</h4>
             </div>
             <div class="row" style="margin-left: 0; ">
-                <div class="col-md-5" style="padding-left: 0">
+                <div class="col-md-4" style="padding-left: 0">
                     <div class="fb-share-button" data-href="https://mephistopheles-repo.github.io/reaction-test/"
                          data-layout="button_count"></div>
                 </div>
-                <div class="col-md-5" style="padding-left: 0">
-                    <div class="g-plus" data-action="share" data-href="http://mephistopheles-repo.github.io/reaction-test/"></div>
+                <div class="col-md-4" style="padding-left: 0">
+                    <div class="g-plus" data-action="share" data-annotation="bubble" data-href="http://mephistopheles-repo.github.io/reaction-test/"></div>
                 </div>
                 <div class="col-md-4" style="padding-left: 0">
                     <script type="text/javascript">
                         document.write(VK.Share.button(false,{
                             url:"https://mephistopheles-repo.github.io/reaction-test/",
                             text:"Поделиться",
-                            type: 'button',
+                            type: 'round',
                             title: 'Хороший сайт',
                             description: 'Это мой собственный сайт, я его очень долго делал',
                             noparse: true
@@ -65,7 +64,17 @@ margin-bottom: 40px;">
             </div>
         </div>
     </div>
-    <div class="row" style="padding-top: 100px;">
+    <div class="row" style="padding-top: 10px">
+        <div class="col-md-2">
+            <p>Текущий : <span id="js-curent-result">0</span>c</p>
+        </div>
+        <div class="col-md-2">
+            <p>Лучший ваш : <span id="js-best-my-result">0</span>c</p>
+        </div>
+        <div class="col-md-2">
+            <p>Лучший : <span id="js-best-result">0</span>c</p>
+        </div>
+    </div>    <div class="row" style="padding-top: 100px;">
         Эта игра является клоном <a rel="nofollow" href="http://reactiontest.narod.ru/">оригинальной игры</a>
     </div>
     <div id="fb-root"></div>

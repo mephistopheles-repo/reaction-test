@@ -27,17 +27,17 @@ define(['game/box', 'io-utils', 'game/player-box', 'underscore-min', 'print'], f
         }, false);
 
         var boxes = [];
-        boxes.push(new Box({x: 30, y: 30, h: 70, w: 75, color: "green"}));
-        boxes.push(new Box({x: 300, y: 330, h: 36, w: 150, color: "blue"}));
-        boxes.push(new Box({x: 20, y: 330, h: 105, w: 45, color: "brown"}));
-        boxes.push(new Box({x: 300, y: 30, h: 120, w: 95, color: "yellow"}));
+        boxes.push(new Box({x: 30, y: 30, h: 70, w: 75, color: "#5cb85c"}));
+        boxes.push(new Box({x: 300, y: 330, h: 36, w: 150, color: "#337ab7"}));
+        boxes.push(new Box({x: 20, y: 330, h: 105, w: 45, color: "#d9534f"}));
+        boxes.push(new Box({x: 300, y: 30, h: 120, w: 95, color: "#f0ad4e"}));
 
         var game = {
             boxes: boxes,
             field: new Box({x: 0, y: 0, h: ctxWrapper.canvasH, w: ctxWrapper.canvasW})
         };
 
-        game.player = new Player({events: events, x: 200, y: 200, h: 50, w: 50, color: "darkgrey", game: game});
+        game.player = new Player({events: events, x: 200, y: 200, h: 50, w: 50, color: "#777", game: game});
 
         game.isStarted = false;
         game.gameStartTime = null;
@@ -48,7 +48,9 @@ define(['game/box', 'io-utils', 'game/player-box', 'underscore-min', 'print'], f
 
         events.add("gameFinish", function () {
             game.isStarted = false;
-            print("total time: " + (new Date().getTime() - game.gameStartTime.getTime()));
+            var time = new Date().getTime() - game.gameStartTime.getTime();
+            var currentTimeEl = document.getElementById("js-curent-result");
+            currentTimeEl.innerHTML = (time * 0.001).toString();
             events.trigger("restartLevel")
         });
 
