@@ -46,13 +46,22 @@ define(['game/box', 'io-utils', 'game/player-box', 'underscore-min', 'print'], f
             game.isStarted = true;
         }, true);
 
+        var drawBoxes = function () {
+            for (var b in boxes) {
+                boxes[b].draw(ctxWrapper.ctx);
+            }
+        };
+
         events.add("gameFinish", function () {
+            if (!game.isStarted) return;
             game.isStarted = false;
             var time = new Date().getTime() - game.gameStartTime.getTime();
             var currentTimeEl = document.getElementById("js-curent-result");
             currentTimeEl.innerHTML = (time * 0.001).toString();
-            events.trigger("restartLevel")
+            drawBoxes();
+            game.player.draw(ctxWrapper.ctx);
         });
+
 
         ctxWrapper.mainLoop = function (time) {
             //this - ctxWrapper
@@ -63,9 +72,7 @@ define(['game/box', 'io-utils', 'game/player-box', 'underscore-min', 'print'], f
             }
             game.player.tick(time, game);
 
-            for (var b in boxes) {
-                boxes[b].draw(this.ctx);
-            }
+            drawBoxes();
             game.player.draw(this.ctx);
         };
     }

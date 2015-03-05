@@ -23,6 +23,9 @@ define(['game/box', 'aabb-util', 'print'], function (parent, aabbUtil, print) {
 
             this.events.add("mouseUp", function (pos) {
                     self.dragged = false;
+                    if (!self.game.isStarted){
+                        self.events.trigger("restartLevel");
+                    }
                 }
             );
 
