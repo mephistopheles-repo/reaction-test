@@ -46,9 +46,19 @@ define(['game/box', 'io-utils', 'game/player-box', 'underscore-min', 'print'], f
             game.isStarted = true;
         }, true);
 
+        var myBestTimeEl = document.getElementById("js-best-my-result");
+        myBestTimeEl.innerHTML = localStorage.getItem("myBestTime") || 0;
+
         var drawBoxes = function () {
             for (var b in boxes) {
                 boxes[b].draw(ctxWrapper.ctx);
+            }
+        };
+
+        var saveMyBestTime = function (time) {
+            var myBestTime = localStorage.getItem("myBestTime") || 0;
+            if (myBestTime < time) {
+                localStorage.setItem("myBestTime", time);
             }
         };
 
@@ -57,7 +67,9 @@ define(['game/box', 'io-utils', 'game/player-box', 'underscore-min', 'print'], f
             game.isStarted = false;
             var time = new Date().getTime() - game.gameStartTime.getTime();
             var currentTimeEl = document.getElementById("js-curent-result");
-            currentTimeEl.innerHTML = (time * 0.001).toString();
+            time = (time * 0.001).toFixed(3);
+            saveMyBestTime(time);
+            currentTimeEl.innerHTML = time.toString();
             drawBoxes();
             game.player.draw(ctxWrapper.ctx);
         });
