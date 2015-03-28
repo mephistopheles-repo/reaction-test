@@ -1,7 +1,7 @@
 /**
  * Created by denuss on 21.02.2015.
  */
-define(['aabb-util'], function (aabbUtil) {
+define(['aabb-util', 'underscore-min'], function (aabbUtil, _) {
     var constants = {
         minSX: 5,
         minSY: 5,
@@ -11,20 +11,19 @@ define(['aabb-util'], function (aabbUtil) {
         changeSpeedInterval: 1500
     };
 
-    return function (pos, size, color) {
-        this.x = pos.x;
-        this.y = pos.y;
-        this.w = size.w;
-        this.h = size.h;
+    return function (params) {
+        _.extend(this, params);
         this.mx = this.x + this.w;
         this.my = this.y + this.h;
-        this.color = color || "white";
-        var sx = constants.minSX;
-        var sy = constants.minSY;
+        this.color = this.color || "white";
+        var sx = constants.minSX * (_.random(0, 1) ? 1 : -1);
+        var sy = constants.minSY * (_.random(0, 1) ? 1 : -1);
         var lastTime = 0;
         var changeSpeedTime = 0;
 
         this.tick = function (time, game) {
+            if (!game.isStarted) return;
+
             lastTime += time.dt;
             changeSpeedTime += time.dt;
 
@@ -61,13 +60,18 @@ define(['aabb-util'], function (aabbUtil) {
                     y = this.y + sy;
                 }
 
-                this.x = x;
-                this.y = y;
-                this.mx = this.x + this.w;
-                this.my = this.y + this.h;
+                this.setPos(x, y);
 
                 lastTime = 0;
             }
+        };
+
+
+        this.setPos = function (x, y) {
+            this.x = x;
+            this.y = y;
+            this.mx = this.x + this.w;
+            this.my = this.y + this.h;
         };
 
         this.draw = function (ctx) {

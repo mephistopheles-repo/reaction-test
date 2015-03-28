@@ -10,8 +10,10 @@ define(function () {
         var lastTime = 0;
 
         this.mainLoop = null;
+        this.disposed = false;
 
         var _run = function () {
+            if (self.disposed) return;
             requestAnimationFrame(_run);
             var now = new Date().getTime();
             var dt = now - lastTime;
